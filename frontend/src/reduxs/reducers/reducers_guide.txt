@@ -1,0 +1,21 @@
+healths: [], get all
+health: {}, get by param
+status: "idle", status load data
+error: null, message error
+
+get all 
+1. ตรวจสอบการเชื่อมต่อ ข้อมูล จาก สถานะ status 
+- idle = สถานะ เร่ิมต้น
+- loading  = กำลังโหลด ข้อมูล
+- succeeded = โหลดข้อมูล สำเร็จ
+- failed = โหลดข้อมูล ผิดพลาด
+
+2. กรณี โหลดข้อมูล สำเร็จ ให้ทำการนำข้อมูล แสดงใน หน้าลูก
+3. กรณี โหลดข้อมูล ผิดพลาด ให้ทำการ แสดงข้อผิลพลาด หน้าลูก
+
+ListData
+List    => ListContent
+        => ListMessage
+
+
+    

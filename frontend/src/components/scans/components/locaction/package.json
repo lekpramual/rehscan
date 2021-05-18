@@ -1,0 +1,7 @@
+{
+    "name": "locaction",
+    "version": "1.0.0",
+    "private": true,
+    "main": "./Locaction.js"
+  }
+  

@@ -1,0 +1,9 @@
+**/node_modules
+**/build
+**/package-lock.json
+**/theme
+
+**/*.log
+*.log
+
+*/"proxy": "http://192.168.99.58:8000"
