@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "Sarabun-R";
+  font-style: normal;
+  src: local("Sarabun-R"), url(../../fonts/Sarabun-Regular.ttf) format("woff2");
+}
+
+@font-face {
+  font-family: "Sarabun-B";
+  font-style: bold;
+  src: local("Sarabun-B"), url(../../fonts/Sarabun-Bold.ttf) format("woff2");
+}
+
+* {
+  font-family: Sarabun-R;
+}
