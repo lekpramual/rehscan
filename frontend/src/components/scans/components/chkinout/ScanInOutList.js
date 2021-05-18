@@ -36,7 +36,7 @@ const ScanInOutList = (props) => {
           //   ? state.qrscan.longitude
           //   : 0
         },
-        0.5
+        0.2
       )
         ? props.confirm(props.msg, false)
         : setShow(true);
@@ -51,9 +51,17 @@ const ScanInOutList = (props) => {
 
   return props.msg === "chkin" || props.msg === "chkout" ? (
     !props.isGeolocationAvailable ? (
-      <div>Your browser does not support Geolocation</div>
+      <ScanInOutMessage
+        msg="--- เบราว์เซอร์ของคุณไม่รองรับ แนะนำ Chome---"
+        alert="alert alert-warning"
+      />
     ) : !props.isGeolocationEnabled ? (
-      <div>Geolocation is not enabled</div>
+      <div>
+        <ScanInOutMessage
+          msg="--- กรุณาเปิด GPS มือถือของท่าน ---"
+          alert="alert alert-warning"
+        />
+      </div>
     ) : props.coords ? (
       <>
         <div className="row">
@@ -87,12 +95,12 @@ const ScanInOutList = (props) => {
               lat: qrscan !== undefined ? qrscan.latitude : 0,
               lng: qrscan !== undefined ? qrscan.longitude : 0
             },
-            0.5
+            0.2
           ) ? (
             <div className="col-12">
               {props.show ? (
                 <ScanInOutMessage
-                  msg="--- กรุณาตรวจสอบจุดสแกน ---"
+                  msg="---  ระยะห่างจากจุดสแกน ไม่เกิน 200 เมตร ---"
                   alert="alert alert-warning"
                 />
               ) : (
@@ -107,7 +115,7 @@ const ScanInOutList = (props) => {
           ) : (
             <div className="col-12" style={{ textAlign: "center" }}>
               <ScanInOutMessage
-                msg="--- กรุณาตรวจสอบจุดสแกน ---"
+                msg="---  ระยะห่างจากจุดสแกน ไม่เกิน 200 เมตร ---"
                 alert="alert alert-warning"
               />
             </div>

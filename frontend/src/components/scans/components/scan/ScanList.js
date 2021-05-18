@@ -29,13 +29,11 @@ const ScanList = (props) => {
         <table className="table table-bordered table-responsive p-0">
           <thead>
             <tr>
-              <td style={{ width: "5%" }}>รหัส</td>
-              <td style={{ width: "20%" }}>ชื่อสมาชิก</td>
-              <td style={{ width: "15%" }}>เงินหุ้น</td>
-              <td style={{ width: "10%" }}>ยอดซื้อ</td>
-              <td style={{ width: "10%" }}>ปันผลหุ้น</td>
-              <td style={{ width: "15%" }}>เฉลี่ยคืนยอดซื้อ</td>
-              <td style={{ width: "20%" }}>จ่ายจริง</td>
+              <td style={{ width: "5%" }}>ลำดับ</td>
+              <td style={{ width: "20%" }}>วันที่</td>
+              <td style={{ width: "15%" }}>เวลา</td>
+              <td style={{ width: "10%" }}>สถานที่</td>
+              <td style={{ width: "10%" }}>สถานะ</td>
             </tr>
           </thead>
           <tbody>
