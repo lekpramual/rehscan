@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import memberchkinout from "../../../../assets/ico/003-fingerprint-2.svg";
 
 function ScanInOut(props) {

@@ -2,7 +2,7 @@ import React from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
 // Containers
 const DefaultLayout = React.lazy(() => import("./containers/AdminLayout"));
-const LoginLayout = React.lazy(() => import("./containers/Loginlayout"));
+const Registerlayout = React.lazy(() => import("./containers/Registerlayout"));
 
 const loading = () => (
   <div className="animated fadeIn pt-3 text-center">กำลังดาวน์โหลด...</div>
@@ -16,13 +16,13 @@ export default function App() {
         <Switch>
           <Route
             exact
-            path="/backoffice/login"
-            name="Login"
-            render={(props) => <LoginLayout {...props} />}
+            path="/scan/member-register"
+            name="Register"
+            render={(props) => <Registerlayout {...props} />}
           />
           <Route
             path="/"
-            name="Dashboard"
+            name="ScanInOut"
             render={(props) => <DefaultLayout {...props} />}
           />
         </Switch>

@@ -1,18 +1,33 @@
 import React, { useState } from "react";
-import classNames from "classnames";
+// import classNames from "classnames";
+
+import moment from "moment";
+import DatePicker from "react-datepicker";
+import { registerLocale } from "react-datepicker";
+
+/**
+ * Style
+ */
+import "react-datepicker/dist/react-datepicker.css";
+//import moment from "moment";
+import th from "date-fns/locale/th";
+import "moment/locale/th.js";
+moment.locale("th");
+registerLocale("th", th);
 
 function Search(props) {
-  const initialState = {
-    member: { value: "", isValid: true },
-    membername: { value: "", isValid: true }
-  };
-  // set state with formdefaults
-  const [data, setData] = useState(initialState);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+
   // handle confirm on props with record component
   const onConfirmClick = () => {
     if (props.confirm) {
-      const msg = "SearchMember";
-      props.confirm(msg, data.member.value, data.membername.value);
+      const msg = "SearchList";
+      props.confirm(
+        msg,
+        moment(startDate).format("YYYY-MM-DD"),
+        moment(endDate).format("YYYY-MM-DD")
+      );
     } else {
       props.confirm("");
     }
@@ -20,18 +35,16 @@ function Search(props) {
   // handle from validate
   const formIsValidSearch = () => {
     let isGood = true;
-    if (data.member.value === "") {
-      data.member.isValid = false;
+    if (startDate === "" || startDate === null) {
       isGood = false;
     }
-    if (data.membername.value === "") {
-      data.membername.isValid = false;
+    if (endDate === "" || endDate === null) {
       isGood = false;
     }
     if (!isGood) {
-      setData({
-        ...data
-      });
+      // setData({
+      //   ...data
+      // });
     }
     return isGood;
   };
@@ -39,6 +52,7 @@ function Search(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formIsValidSearch()) {
+      console.log(startDate, endDate);
       onConfirmClick();
     }
   };
@@ -54,20 +68,33 @@ function Search(props) {
                     {" "}
                     วันที่เริ่มต้น
                   </label>
-                  <input
-                    style={{
-                      backgroundColor: "#f2f4f6"
-                    }}
-                    className={classNames("form-control form-control", {
-                      "form-control form-control is-invalid":
-                        data.member.isValid === false
-                    })}
-                    placeholder="กรอก วันที่เริ่มต้น"
-                    value={data.member.value}
-                    name="member"
+                  {/* <DatePicker
+                    locale="th"
+                    className="form-control"
+                    selected={data.start.value}
                     onChange={(e) =>
-                      setData({ ...data, member: { value: e.target.value } })
-                    }
+                      setData({
+                        ...data,
+                        start: {
+                          value: moment(e).toDate(),
+                          isValid: true
+                        }
+                      })
+                    } // เฉพาะเมื่อค่ามีการเปลี่ยนแปลง
+                    dateFormat="dd LLLL yyyy"
+                    placeholderText="กรุณาเลือกวันที่"
+                    //isClearable
+                    isClearable={data.start.value !== "" ? true : false}
+                  /> */}
+
+                  <DatePicker
+                    locale="th"
+                    className="form-control"
+                    isClearable={startDate !== "" ? true : false}
+                    dateFormat="dd LLLL yyyy"
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    placeholderText="กรุณาเลือกวันที่เริ่มต้น"
                   />
                 </div>
               </div>
@@ -77,36 +104,26 @@ function Search(props) {
                     {" "}
                     วันที่สิ้นสุด
                   </label>
-                  <input
-                    style={{
-                      backgroundColor: "#f2f4f6"
-                    }}
-                    className={classNames("form-control form-control", {
-                      "form-control form-control is-invalid":
-                        data.membername.isValid === false
-                    })}
-                    placeholder="กรอก วันที่สิ้นสุด"
-                    value={data.membername.value}
-                    name="membername"
-                    onChange={(e) =>
-                      setData({
-                        ...data,
-                        membername: { value: e.target.value }
-                      })
-                    }
+                  <DatePicker
+                    locale="th"
+                    className="form-control"
+                    isClearable={endDate !== "" ? true : false}
+                    dateFormat="dd LLLL yyyy"
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    placeholderText="กรุณาเลือกวันที่สิ้นสุด"
                   />
                 </div>
               </div>
 
               <div className="col-md-2 col-12">
                 <div className="form-group">
-                  <label
-                    htmlFor="InputMember"
-                    className="col-form-label"
-                  ></label>
+                  <label htmlFor="InputMember" className="col-form-label">
+                    &nbsp;
+                  </label>
 
                   <button
-                    style={{ marginTop: 15 }}
+                    // style={{ marginTop: 15 }}
                     type="submit"
                     className="btn btn-default btn-block"
                   >

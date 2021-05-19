@@ -3,6 +3,8 @@ import member from "./assets/ico/014-fingerprint-9.svg";
 import memberchkinout from "./assets/ico/013-fingerprint-8.svg";
 import memberlocaction from "./assets/ico/001-fingerprint.svg";
 
+const Register = React.lazy(() => import("./components/common/registerlayout"));
+
 const Scan = React.lazy(() => import("./components/scans/containers/Scan"));
 const ScanInOut = React.lazy(() =>
   import("./components/scans/containers/ScanInOut")
@@ -12,6 +14,13 @@ const Locaction = React.lazy(() =>
 );
 
 const routes = [
+  {
+    path: "/scan/member-register",
+    exact: true,
+    name: "ข้อมูลสแกน",
+    component: Register,
+    icon: member
+  },
   {
     path: "/scan/member-list",
     exact: true,

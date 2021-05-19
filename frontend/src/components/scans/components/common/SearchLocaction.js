@@ -1,18 +1,15 @@
 import React, { useState } from "react";
-import classNames from "classnames";
+// import classNames from "classnames";
+import Select from "react-select";
 
 function SearchLocaction(props) {
-  const initialState = {
-    member: { value: "", isValid: true },
-    membername: { value: "", isValid: true }
-  };
-  // set state with formdefaults
-  const [data, setData] = useState(initialState);
+  const [service, setService] = useState("");
+
   // handle confirm on props with record component
   const onConfirmClick = () => {
     if (props.confirm) {
-      const msg = "SearchMember";
-      props.confirm(msg, data.member.value, data.membername.value);
+      const msg = "SearchLocation";
+      props.confirm(msg, service);
     } else {
       props.confirm("");
     }
@@ -20,18 +17,14 @@ function SearchLocaction(props) {
   // handle from validate
   const formIsValidSearch = () => {
     let isGood = true;
-    if (data.member.value === "") {
-      data.member.isValid = false;
+    if (service === "" || service === null) {
       isGood = false;
     }
-    if (data.membername.value === "") {
-      data.membername.isValid = false;
-      isGood = false;
-    }
+
     if (!isGood) {
-      setData({
-        ...data
-      });
+      // setData({
+      //   ...data
+      // });
     }
     return isGood;
   };
@@ -39,9 +32,16 @@ function SearchLocaction(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formIsValidSearch()) {
+      console.log(service);
       onConfirmClick();
     }
   };
+
+  const options = [
+    { value: "100", label: "ศูนย์คอมพิวเตอร์" },
+    { value: "101", label: "ตึกจุฬาภรณ์" },
+    { value: "102", label: "อาคารเภสัช" }
+  ];
   return (
     <div className="card-header">
       <div className="row">
@@ -52,38 +52,32 @@ function SearchLocaction(props) {
                 <div className="form-group">
                   <label htmlFor="InputMember" className="col-form-label">
                     {" "}
-                    สถานที่
+                    จุดสแกน
                   </label>
-                  <input
-                    style={{
-                      backgroundColor: "#f2f4f6"
-                    }}
-                    className={classNames("form-control form-control", {
-                      "form-control form-control is-invalid":
-                        data.member.isValid === false
-                    })}
-                    placeholder="กรอก สถานที่"
-                    value={data.member.value}
-                    name="member"
-                    onChange={(e) =>
-                      setData({ ...data, member: { value: e.target.value } })
-                    }
+                  <Select
+                    // value={data.service}
+                    select={service}
+                    options={options}
+                    placeholder="เลือก จุดสแกน..."
+                    // onChange={(val) => {
+                    //   setData({
+                    //     ...data,
+                    //     service: val
+                    //   });
+                    // }}
+                    onChange={(val) => setService(val)}
+                    isClearable={true}
                   />
                 </div>
               </div>
 
               <div className="col-md-2 col-12">
                 <div className="form-group">
-                  <label
-                    htmlFor="InputMember"
-                    className="col-form-label"
-                  ></label>
-
-                  <button
-                    style={{ marginTop: 15 }}
-                    type="submit"
-                    className="btn btn-default btn-block"
-                  >
+                  <label htmlFor="InputMember" className="col-form-label">
+                    {" "}
+                    &nbsp;
+                  </label>
+                  <button type="submit" className="btn btn-default btn-block">
                     <i className="fa fa-search" /> ค้นหา
                   </button>
                 </div>

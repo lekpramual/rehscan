@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
 import arePoints from "./arePoints";
 import QrReader from "react-qr-reader";
-import { Redirect } from "react-router";
 import { geolocated } from "react-geolocated";
-
-import { toast } from "react-toastify";
 
 import ScanInOutMessage from "./ScanInOutMessage";
 
 import "react-toastify/dist/ReactToastify.css";
 const ScanInOutList = (props) => {
   const [qrscan, setQrscan] = useState([]);
-  const [show, setShow] = useState(true);
 
   const handleScan = (data, lat, lng) => {
     if (data !== null && data !== undefined) {
@@ -27,19 +23,12 @@ const ScanInOutList = (props) => {
         },
         {
           lat: obj.latitude,
-          // state.qrscan !== undefined
-          //   ? state.qrscan.latitude
-          //   ? state.qrscan.latitude
-          //   : 0,
           lng: obj.longitude
-          // state.qrscan !== undefined
-          //   ? state.qrscan.longitude
-          //   : 0
         },
-        0.2
+        0.1
       )
         ? props.confirm(props.msg, false)
-        : setShow(true);
+        : props.confirm(props.msg, true);
     }
   };
 
@@ -58,7 +47,7 @@ const ScanInOutList = (props) => {
     ) : !props.isGeolocationEnabled ? (
       <div>
         <ScanInOutMessage
-          msg="--- กรุณาเปิด GPS มือถือของท่าน ---"
+          msg="--- กรุณาเปิด GPS มือถือของท่าน &hellip; ---"
           alert="alert alert-warning"
         />
       </div>
@@ -95,12 +84,12 @@ const ScanInOutList = (props) => {
               lat: qrscan !== undefined ? qrscan.latitude : 0,
               lng: qrscan !== undefined ? qrscan.longitude : 0
             },
-            0.2
+            0.1
           ) ? (
             <div className="col-12">
               {props.show ? (
                 <ScanInOutMessage
-                  msg="---  ระยะห่างจากจุดสแกน ไม่เกิน 200 เมตร ---"
+                  msg="---  ระยะห่างจากจุดสแกน ไม่เกิน 100 เมตร &hellip;---"
                   alert="alert alert-warning"
                 />
               ) : (
@@ -110,12 +99,11 @@ const ScanInOutList = (props) => {
                 />
               )}
 
-              {/* {_commitAutoSave()} */}
             </div>
           ) : (
             <div className="col-12" style={{ textAlign: "center" }}>
               <ScanInOutMessage
-                msg="---  ระยะห่างจากจุดสแกน ไม่เกิน 200 เมตร ---"
+                msg="---  ระยะห่างจากจุดสแกน ไม่เกิน 100 เมตร &hellip; ---"
                 alert="alert alert-warning"
               />
             </div>
@@ -123,7 +111,12 @@ const ScanInOutList = (props) => {
         </div>
       </>
     ) : (
-      <div>กำลังค้นหาตำแหน่ง &hellip; </div>
+      <div className="col-12" style={{ textAlign: "center" }}>
+        <ScanInOutMessage
+          msg="--- กำลังค้นหาตำแหน่ง &hellip; ---"
+          alert="alert alert-info"
+        />
+      </div>
     )
   ) : (
     <div className="col-12" style={{ textAlign: "center" }}>

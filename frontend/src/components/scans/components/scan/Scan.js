@@ -1,23 +1,13 @@
 import React, { useEffect, useState } from "react";
 import SearchMember from "../common/Search";
-import Information from "../common/info-json";
 import ScanList from "./ScanList";
 function Scan() {
   const [data, setData] = useState([]);
 
   // Confirm From Search
-  const onConfirm = (msg, member_search, member_name) => {
-    if (msg === "SearchMember") {
-      const filterData =
-        member_search !== ""
-          ? Information.filter(
-              (row) =>
-                row.member_no === `${member_search}` &&
-                row.member_name === `${member_name}`
-            )
-          : "";
-
-      setData(filterData);
+  const onConfirm = (msg, date_start, date_end) => {
+    if (msg === "SearchList") {
+      console.log(date_start, date_end);
     }
   };
 
