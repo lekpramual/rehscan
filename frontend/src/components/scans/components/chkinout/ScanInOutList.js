@@ -11,11 +11,9 @@ const ScanInOutList = (props) => {
 
   const handleScan = (data, lat, lng) => {
     if (data !== null && data !== undefined) {
-      console.log(data[0]["latitude"]);
       var obj = JSON.parse(data);
-
       setQrscan(obj);
-      console.log(obj);
+      console.log(obj.latitude);
       arePoints(
         {
           lat: lat,
@@ -25,7 +23,7 @@ const ScanInOutList = (props) => {
           lat: obj.latitude,
           lng: obj.longitude
         },
-        0.1
+        0.2
       )
         ? props.confirm(props.msg, false)
         : props.confirm(props.msg, true);
@@ -55,6 +53,12 @@ const ScanInOutList = (props) => {
       <>
         <div className="row">
           <div className="col-12">
+            {props.coords.latitude.toFixed(4)} ||{" "}
+            {qrscan !== undefined ? parseFloat(qrscan.latitude).toFixed(4) : 0}
+            <br />
+            {props.coords.longitude.toFixed(4)} ||{" "}
+            {qrscan !== undefined ? parseFloat(qrscan.longitude).toFixed(4) : 0}
+            <br />
             {props.show ? (
               <QrReader
                 delay={300}
@@ -67,6 +71,7 @@ const ScanInOutList = (props) => {
                   )
                 }
                 style={{ width: "100%" }}
+                // style={{ width: "200px", heigth: "200px" }}
               />
             ) : (
               ""
@@ -81,10 +86,16 @@ const ScanInOutList = (props) => {
               lng: props.coords.longitude.toFixed(4)
             },
             {
-              lat: qrscan !== undefined ? qrscan.latitude : 0,
-              lng: qrscan !== undefined ? qrscan.longitude : 0
+              lat:
+                qrscan !== undefined
+                  ? parseFloat(qrscan.latitude).toFixed(4)
+                  : 0,
+              lng:
+                qrscan !== undefined
+                  ? parseFloat(qrscan.longitude).toFixed(4)
+                  : 0
             },
-            0.1
+            0.3
           ) ? (
             <div className="col-12">
               {props.show ? (
@@ -98,7 +109,6 @@ const ScanInOutList = (props) => {
                   alert="alert alert-success"
                 />
               )}
-
             </div>
           ) : (
             <div className="col-12" style={{ textAlign: "center" }}>
@@ -130,7 +140,9 @@ const ScanInOutList = (props) => {
 
 export default geolocated({
   positionOptions: {
-    enableHighAccuracy: false
+    enableHighAccuracy: true,
+    maximumAge: 100,
+    timeout: Infinity
   },
   userDecisionTimeout: 5000
 })(ScanInOutList);
