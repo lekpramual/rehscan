@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
-import ScanList from "./ScanInOutList";
+import ScanInOutLocaction from "./ScanInOutLocaction";
 import SearchMember from "../common/ScanInOut";
 
 function ScanInOut() {
   const [msg, setMsg] = useState("");
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   // Confirm From Search
   const onConfirm = (msg, isshow) => {
-    console.log(msg, isshow);
+    console.log(isshow);
     setMsg(msg);
     setShow(isshow);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log("Reload ScanInOut...");
+  }, [!show]);
 
   return (
     <section className="content" style={{ marginTop: -16 }}>
@@ -20,7 +22,12 @@ function ScanInOut() {
         <div className="card">
           <SearchMember confirm={onConfirm} />
           <div className="card-body">
-            <ScanList msg={msg} show={show} confirm={onConfirm} />
+            {/* {msg === "chkin" || msg === "chkout" ? (
+              <ScanList msg={msg} show={show} confirm={onConfirm} />
+            ) : (
+              ""
+            )} */}
+            {show ? <ScanInOutLocaction /> : ""}
           </div>
         </div>
       </div>

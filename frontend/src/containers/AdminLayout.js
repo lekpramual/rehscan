@@ -32,7 +32,7 @@ export default function DefaultLayout(props) {
                 />
               ) : null;
             })}
-            <Redirect from="/" to="/scan/member-chkinout" />
+            <Redirect from="/" to="/scan/member-list" />
           </Switch>
         </Suspense>
         <ToastContainer />
