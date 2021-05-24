@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ScanInOutLocaction from "./ScanInOutLocaction";
+import ScanInOutList from "./ScanInOutList";
 import SearchMember from "../common/ScanInOut";
 
 function ScanInOut() {
@@ -14,7 +14,7 @@ function ScanInOut() {
 
   useEffect(() => {
     console.log("Reload ScanInOut...");
-  }, [!show]);
+  }, []);
 
   return (
     <section className="content" style={{ marginTop: -16 }}>
@@ -22,12 +22,7 @@ function ScanInOut() {
         <div className="card">
           <SearchMember confirm={onConfirm} />
           <div className="card-body">
-            {/* {msg === "chkin" || msg === "chkout" ? (
-              <ScanList msg={msg} show={show} confirm={onConfirm} />
-            ) : (
-              ""
-            )} */}
-            {show ? <ScanInOutLocaction /> : ""}
+            <ScanInOutList msg={msg} show={show} confirm={onConfirm} />
           </div>
         </div>
       </div>

@@ -32,26 +32,6 @@ function Aside(props) {
         >
           <li className="nav-item">
             <Link
-              to="/scan/member-chkinout"
-              className={handleNavLink("/scan/member-chkinout")}
-              replace
-            >
-              <img
-                src={memberchkinout}
-                alt="memberchk inout"
-                style={{
-                  width: 30,
-                  marginRight: 5,
-                  marginLeft: -7,
-                  paddingBottom: 2
-                }}
-              />
-              <p style={{ fontWeight: "bold" }}> สแกนเข้า-ออก </p>
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link
               to="/scan/member-list"
               className={handleNavLink("/scan/member-list")}
               replace
@@ -67,6 +47,26 @@ function Aside(props) {
                 }}
               />
               <p style={{ fontWeight: "bold" }}> ข้อมูลสแกน </p>
+            </Link>
+          </li>
+
+          <li className="nav-item">
+            <Link
+              to="/scan/member-chkinout"
+              className={handleNavLink("/scan/member-chkinout")}
+              replace
+            >
+              <img
+                src={memberchkinout}
+                alt="memberchk inout"
+                style={{
+                  width: 30,
+                  marginRight: 5,
+                  marginLeft: -7,
+                  paddingBottom: 2
+                }}
+              />
+              <p style={{ fontWeight: "bold" }}> สแกนเข้า-ออก </p>
             </Link>
           </li>
 
