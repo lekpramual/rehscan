@@ -3,7 +3,7 @@ import { geolocated } from "react-geolocated";
 
 const ScanInOutLocaction = (props) => {
   useEffect(() => {
-    console.log("Reload Locaction...",props.isGeolocationEnabled);
+    console.log("Reload Locaction...", props.isGeolocationEnabled);
   }, [props.isGeolocationEnabled]);
 
   return !props.isGeolocationAvailable ? (

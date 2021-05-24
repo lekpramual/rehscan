@@ -3,7 +3,7 @@ import arePoints from "./arePoints";
 import QrReader from "react-qr-reader";
 import { geolocated } from "react-geolocated";
 
-import ScanInOutMessage from "./ScanInOutMessage";
+import ScanInOutMessage from "../common/Message";
 
 import "react-toastify/dist/ReactToastify.css";
 const ScanInOutList = (props) => {
@@ -130,11 +130,13 @@ const ScanInOutList = (props) => {
       </div>
     )
   ) : (
-    <div className="col-12" style={{ textAlign: "center" }}>
-      <ScanInOutMessage
-        msg="--- กด สแกนเข้า - ออก เพื่อทำการสแกน ---"
-        alert="alert alert-info"
-      />
+    <div className="row">
+      <div className="col-12" style={{ textAlign: "center" }}>
+        <ScanInOutMessage
+          msg="--- กด สแกนเข้า - ออก เพื่อทำการสแกน ---"
+          alert="alert alert-info"
+        />
+      </div>
     </div>
   );
 };

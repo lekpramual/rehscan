@@ -1,16 +1,32 @@
-import React, { useEffect, useState } from "react";
-import SearchMember from "../common/SearchLocaction";
+import React, { useEffect } from "react";
 import LocactionList from "./LocactionList";
+import LocactionAdd from "./LocactionAdd";
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+
 function Locaction() {
-  const [data, setData] = useState([]);
+  //const [data, setData] = useState([]);
+
+  const data = [];
   // Confirm From Search
-  const onConfirm = (msg, service_value, service_label) => {
-    if (msg === "SearchLocation") {
-      console.log(service_value, service_label);
-    }
+  const onConfirm = (latitude, longitude, location) => {
+    console.log(latitude, longitude, location);
+
+    toast.success("ปรับปรุงข้อมูลเรียบร้อย", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined
+    });
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log("Reset ...");
+  }, []);
 
   return (
     <section className="content" style={{ marginTop: -16 }}>
@@ -18,8 +34,8 @@ function Locaction() {
         <div className="row">
           <div className="col-12">
             <div className="card">
-              <SearchMember confirm={onConfirm} />
-              <div className="card-body">
+              <div className="card-body ">
+                <LocactionAdd confirm={onConfirm} />
                 <LocactionList data={data} />
               </div>
             </div>

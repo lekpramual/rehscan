@@ -25,16 +25,16 @@ const LocactionList = (props) => {
   const { iscount, isdata } = isCheckData();
   return (
     <div className="row">
-      <div className="col-12">
-        <table className="table table-bordered table-responsive p-0">
+      <div className="col-12 table table-responsive ">
+        <table className="table table-bordered table-hover text-nowrap">
           <thead>
             <tr>
-              <td style={{ width: "5%" }}>ลำดับ</td>
-              <td style={{ width: "20%" }}>ละติจูด</td>
-              <td style={{ width: "15%" }}>ลองจิจูด</td>
-              <td style={{ width: "10%" }}>สถานที่</td>
-              <td style={{ width: "10%" }}>สถานะ</td>
-              <td style={{ width: "10%" }}>คำสั่ง</td>
+              <td>ลำดับ</td>
+              <td>ละติจูด</td>
+              <td>ลองติจูด</td>
+              <td>สถานที่</td>
+              <td>สถานะ</td>
+              <td>คำสั่ง</td>
             </tr>
           </thead>
           <tbody>

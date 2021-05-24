@@ -1,6 +1,6 @@
 import React from "react";
 
-const ScanInOutMessage = (props) => {
+const Message = (props) => {
   return (
     <div className="row" style={{ marginBottom: 10 }}>
       <div className="col-12">
@@ -13,4 +13,4 @@ const ScanInOutMessage = (props) => {
   );
 };
 
-export default ScanInOutMessage;
+export default Message;

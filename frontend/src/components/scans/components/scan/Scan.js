@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import SearchMember from "../common/Search";
 import ScanList from "./ScanList";
 function Scan() {
-  const [data, setData] = useState([]);
-
+  // const [data, setData] = useState([]);
+  const data = [];
   // Confirm From Search
   const onConfirm = (msg, date_start, date_end) => {
     if (msg === "SearchList") {
