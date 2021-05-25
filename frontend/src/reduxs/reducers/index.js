@@ -13,6 +13,7 @@ import departs from "./Depart";
 import labs from "./Lab";
 import shop from "./Shop";
 import healths from "./Health";
+import scanuser from "./ScanUser";
 
 export default combineReducers({
   login,
@@ -29,4 +30,5 @@ export default combineReducers({
   labs,
   shop,
   healths,
+  scanuser
 });
