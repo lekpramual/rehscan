@@ -5,3 +5,5 @@ yarn predeploy
 #2. Git Pages Deploy
 -----------------------------------
 yarn deploy
+
+serve -s build
