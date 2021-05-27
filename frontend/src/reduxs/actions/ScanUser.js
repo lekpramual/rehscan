@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ApiServiceIntranet, SecretKey } from "../../managers/ApiCon";
+import { ApiServiceHeroku, SecretKey } from "../../managers/ApiCon";
 
 export const SACNUSER_BEGIN = "SACNUSER_BEGIN";
 export const SACNUSER_SUCCESS = "SACNUSER_SUCCESS";
@@ -23,7 +23,7 @@ export function index() {
   return (dispatch) => {
     dispatch(scanBegin());
     return axios
-      .get(`${ApiServiceIntranet}/scan/index`, {
+      .get(`${ApiServiceHeroku}/api/scans`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-type": "application/json",
