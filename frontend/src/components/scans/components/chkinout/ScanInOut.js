@@ -3,7 +3,7 @@ import ScanInOutList from "./ScanInOutList";
 import SearchMember from "../common/ScanInOut";
 import { useDispatch, useSelector } from "react-redux";
 
-import { index } from "../../../../reduxs/actions/ScanUser";
+import { show as scanshow } from "../../../../reduxs/actions/ScanUser";
 
 function ScanInOut() {
   // เรียกใช้งาน รีดัก
@@ -21,7 +21,7 @@ function ScanInOut() {
 
   useEffect(() => {
     console.log("Reload ScanInOut...");
-    dispatch(index());
+    dispatch(scanshow("ประ"));
   }, [dispatch]);
 
   return (

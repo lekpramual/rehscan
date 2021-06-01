@@ -19,11 +19,11 @@ export const scanFailure = (payload) => ({
   payload: { payload }
 });
 
-export function index() {
+export function show(search) {
   return (dispatch) => {
     dispatch(scanBegin());
     return axios
-      .get(`${ApiServiceHeroku}/api/scans`, {
+      .get(`${ApiServiceHeroku}/api/user/show?search=${search}`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-type": "application/json",
