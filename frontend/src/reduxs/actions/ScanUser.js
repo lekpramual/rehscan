@@ -1,27 +1,27 @@
 import axios from "axios";
 import { ApiServiceHeroku, SecretKey } from "../../managers/ApiCon";
 
-export const SACNUSER_BEGIN = "SACNUSER_BEGIN";
-export const SACNUSER_SUCCESS = "SACNUSER_SUCCESS";
-export const SACNUSER_FAILURE = "SACNUSER_FAILURE";
+export const SHOW_BEGIN = "SHOW_BEGIN";
+export const SHOW_SUCCESS = "SHOW_SUCCESS";
+export const SHOW_FAILURE = "SHOW_FAILURE";
 
-export const scanBegin = () => ({
-  type: SACNUSER_BEGIN
+export const showBegin = () => ({
+  type: SHOW_BEGIN
 });
 
-export const scanSuccess = (payload) => ({
-  type: SACNUSER_SUCCESS,
+export const showSuccess = (payload) => ({
+  type: SHOW_SUCCESS,
   payload: { payload }
 });
 
-export const scanFailure = (payload) => ({
-  type: SACNUSER_FAILURE,
+export const showFailure = (payload) => ({
+  type: SHOW_FAILURE,
   payload: { payload }
 });
 
-export function show(search) {
+export function showUser(search) {
   return (dispatch) => {
-    dispatch(scanBegin());
+    dispatch(showBegin());
     return axios
       .get(`${ApiServiceHeroku}/api/user/show?search=${search}`, {
         headers: {
@@ -33,9 +33,9 @@ export function show(search) {
       .then((res) => {
         var data = [];
         data.push(res.data);
-        dispatch(scanSuccess(data));
+        dispatch(showSuccess(data));
         return data;
       })
-      .catch((error) => dispatch(scanFailure(error)));
+      .catch((error) => dispatch(showFailure(error)));
   };
 }

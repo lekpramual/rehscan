@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import SearchMember from "../common/Search";
 import ScanList from "./ScanList";
+
+import AuthService from "../../../../managers/AuthService";
 function Scan() {
+  const Auth = new AuthService("http://localhost:3000/");
   // const [data, setData] = useState([]);
   const data = [];
   // Confirm From Search
@@ -11,7 +14,11 @@ function Scan() {
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (!Auth.loggedIn()) {
+      window.location.replace("/#/scan/member-register");
+    }
+  }, [Auth]);
 
   return (
     <section className="content" style={{ marginTop: -16 }}>

@@ -2,6 +2,12 @@ import decode from "jwt-decode";
 import sign from "jwt-encode";
 
 export default class AuthService {
+  loggedIn() {
+    // Checks if there is a saved token and it's still valid
+    const token = this.getToken(); // GEtting token from localstorage
+    return !!token; // handwaiving here
+  }
+
   setToken(data) {
     const secret = "secret";
     const jwt = sign(data, secret);

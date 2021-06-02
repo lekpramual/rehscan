@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import InputMask from "react-input-mask";
 import { useDispatch } from "react-redux";
-
-import AsyncSelect from "react-select/async";
-import { show } from "../../../reduxs/actions/ScanUser";
-import packageJson from "../../../../package.json";
 import AuthService from "../../../managers/AuthService";
+import AsyncSelect from "react-select/async";
 
-export default function Register() {
-  const Auth = new AuthService();
+import packageJson from "../../../../package.json";
+
+// Api
+import { showUser } from "../../../reduxs/actions/ScanUser";
+import { createRegister } from "../../../reduxs/actions/ScanRegister";
+
+function Register(props) {
+  const Auth = new AuthService("http://localhost:3000/");
   const dispatch = useDispatch();
-  // const scanuser = useSelector((state) => state.scanuser.currentScan);
-
   const [inputValue, setValue] = useState("");
   const [selectedValue, setSelectedValue] = useState(null);
   const [phone, setPhone] = useState({ value: "", isValid: true });
@@ -20,13 +22,11 @@ export default function Register() {
 
   // handle input change event
   const handleInputChange = (value) => {
-    console.log(value);
     setValue(value);
   };
 
   // handle selection
   const handleChange = (value) => {
-    console.log(value);
     setSelectedValue(value);
   };
 
@@ -39,10 +39,9 @@ export default function Register() {
     }
 
     // load options in select
-    return dispatch(show(inputValue)).then((response) => {
+    return dispatch(showUser(inputValue)).then((response) => {
       let workers = [];
       if (response && !response.error) {
-        console.log(response);
         response.map((res) => {
           return (workers = res.data.map((res) => {
             return { value: res.badgenumber, label: res.name };
@@ -80,18 +79,74 @@ export default function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formIsValidSearch()) {
-      const data = {
+      const data_token = {
         id: selectedValue.value,
         name: selectedValue.label,
         phone: phone.value
       };
-      Auth.setToken(data);
+
+      const data = {
+        userid: selectedValue.value,
+        name: selectedValue.label,
+        phone: phone.value,
+        cid: cid.value
+      };
+
+      let Create = new Promise(function (resolve, reject) {
+        async function createRegisterMsg() {
+          return await dispatch(createRegister(data)).then((res) => {
+            return res[0].msg;
+          });
+        }
+        // get result by function
+        (async function () {
+          let resRegister = await createRegisterMsg();
+
+          if (resRegister === "created successful") {
+            Auth.setToken(data_token);
+            setTimeout(() => {
+              window.location.replace("/#/scan/member-list");
+            }, 1600);
+            resolve(true);
+          } else {
+            reject(false);
+          }
+        })();
+      });
+
+      // promiss status and msg
+      Create.then((status) => {
+        status
+          ? Swal.fire({
+              // position: "top-center",
+              icon: "success",
+              title: "สำเร็จ",
+              text: "จำกัดการลงทะเบียน 1 คนแต่ 1 เครื่อง",
+              showConfirmButton: false,
+              timer: 1500
+            })
+          : Swal.fire({
+              // position: "top-center",
+              icon: "warning",
+              title: "ผิดพลาด",
+              text: "ลงทะเบียนผิดพลาด",
+              showConfirmButton: false,
+              timer: 1500
+            });
+      }).catch((e) => {
+        Swal.fire({
+          // position: "top-center",
+          icon: "error",
+          title: "ผิดพลาด",
+          text: "ลงทะเบียนผิดพลาด",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      });
     }
   };
 
-  useEffect(() => {
-    console.log("Reload ...");
-  }, [dispatch]);
+  useEffect(() => {}, [dispatch]);
 
   return (
     <div className="hold-transition login-page">
@@ -217,3 +272,5 @@ export default function Register() {
     </div>
   );
 }
+
+export default Register;

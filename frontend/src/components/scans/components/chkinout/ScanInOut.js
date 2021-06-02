@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ScanInOutList from "./ScanInOutList";
 import SearchMember from "../common/ScanInOut";
-import { useDispatch, useSelector } from "react-redux";
 
-import { show as scanshow } from "../../../../reduxs/actions/ScanUser";
 
+import AuthService from "../../../../managers/AuthService";
 function ScanInOut() {
-  // เรียกใช้งาน รีดัก
-  const dispatch = useDispatch();
-  const scanuser = useSelector((state) => state.scanuser.currentScan);
-
+  const Auth = new AuthService("http://localhost:3000/");
+ 
   const [msg, setMsg] = useState("");
   const [show, setShow] = useState(false);
   // Confirm From Search
@@ -20,15 +17,15 @@ function ScanInOut() {
   };
 
   useEffect(() => {
-    console.log("Reload ScanInOut...");
-    dispatch(scanshow("ประ"));
-  }, [dispatch]);
+    if (!Auth.loggedIn()) {
+      window.location.replace("/#/scan/member-register");
+    }
+  }, [Auth]);
 
   return (
     <section className="content" style={{ marginTop: -16 }}>
       <div className="container-fluid">
         <div className="card">
-          <code>{JSON.stringify(scanuser)}</code>
           <SearchMember confirm={onConfirm} />
           <div className="card-body">
             <ScanInOutList msg={msg} show={show} confirm={onConfirm} />

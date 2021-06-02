@@ -1,33 +1,22 @@
 import React, { useEffect } from "react";
 import LocactionList from "./LocactionList";
 import LocactionAdd from "./LocactionAdd";
-import { toast } from "react-toastify";
-
-import "react-toastify/dist/ReactToastify.css";
+import AuthService from "../../../../managers/AuthService";
 
 function Locaction() {
-  //const [data, setData] = useState([]);
+  const Auth = new AuthService("http://localhost:3000/");
 
   const data = [];
   // Confirm From Search
   const onConfirm = (latitude, longitude, location) => {
     console.log(latitude, longitude, location);
-
-    toast.success("ปรับปรุงข้อมูลเรียบร้อย", {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined
-    });
   };
 
   useEffect(() => {
-    console.log("Reset ...");
-  }, []);
-
+    if (!Auth.loggedIn()) {
+      window.location.replace("/#/scan/member-register");
+    }
+  }, [Auth]);
   return (
     <section className="content" style={{ marginTop: -16 }}>
       <div className="container-fluid">

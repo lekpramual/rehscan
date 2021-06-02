@@ -13,7 +13,6 @@ function withAuth(AuthComponent) {
       };
     }
     componentWillMount() {
-        
       if (!Auth.loggedIn()) {
         window.location.replace("/app/signin");
       } else {

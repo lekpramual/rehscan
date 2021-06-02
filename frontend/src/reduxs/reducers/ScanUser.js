@@ -1,31 +1,30 @@
 // เรียกใช้ ข้อมูล Action จาก UsersActions
-import {
-  SACNUSER_BEGIN,
-  SACNUSER_SUCCESS,
-  SACNUSER_FAILURE
-} from "../actions/ScanUser";
+import { SHOW_BEGIN, SHOW_SUCCESS, SHOW_FAILURE } from "../actions/ScanUser";
 
 const initialState = {
-  currentScan: [],
-  currentScanFailure: null
+  showData: [],
+  showStatus: "idle",
+  showFailure: null
 };
 
 export default function listitemReducer(state = initialState, action) {
   switch (action.type) {
-    case SACNUSER_BEGIN:
+    case SHOW_BEGIN:
       return {
         ...state,
-        currentScan: []
+        showStatus: "loading"
       };
-    case SACNUSER_SUCCESS:
+    case SHOW_SUCCESS:
       return {
         ...state,
-        currentScan: action.payload.payload
+        showStatus: "success",
+        showData: action.payload.payload
       };
-    case SACNUSER_FAILURE:
+    case SHOW_FAILURE:
       return {
         ...state,
-        currentScanFailure: action.payload.error
+        showStatus: "failed",
+        showFailure: action.payload.error
       };
     default:
       return state;
