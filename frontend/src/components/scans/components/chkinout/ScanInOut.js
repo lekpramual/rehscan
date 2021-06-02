@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import ScanInOutList from "./ScanInOutList";
 import SearchMember from "../common/ScanInOut";
 
-
 import AuthService from "../../../../managers/AuthService";
 function ScanInOut() {
   const Auth = new AuthService("http://localhost:3000/");
- 
+
   const [msg, setMsg] = useState("");
   const [show, setShow] = useState(false);
   // Confirm From Search
@@ -18,7 +17,7 @@ function ScanInOut() {
 
   useEffect(() => {
     if (!Auth.loggedIn()) {
-      window.location.replace("/#/scan/member-register");
+      window.location.replace("/rehscan/#/scan/member-register");
     }
   }, [Auth]);
 

@@ -16,7 +16,7 @@ function Scan() {
 
   useEffect(() => {
     if (!Auth.loggedIn()) {
-      window.location.replace("/#/scan/member-register");
+      window.location.replace("/rehscan/#/scan/member-register");
     }
   }, [Auth]);
 
