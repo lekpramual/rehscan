@@ -7,9 +7,9 @@ import rootReducer from "../reducers";
 
 export default () => {
   // create reducer redux
-  // let store = createStore(rootReducer, applyMiddleware(logger, thunk));
+  let store = createStore(rootReducer, applyMiddleware(logger, thunk));
   // to server
-  let store = createStore(rootReducer, applyMiddleware(thunk));
+  // let store = createStore(rootReducer, applyMiddleware(thunk));
   // return variable in store persistor
   return { store };
 };

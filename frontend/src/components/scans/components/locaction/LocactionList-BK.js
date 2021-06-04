@@ -1,20 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
+import { LocationToPrint } from "./LocationToPrint";
 
 import { useDispatch, useSelector } from "react-redux";
-
 import { indexLocation } from "../../../../reduxs/actions/ScanLocation";
 
-import { ComponentToPrint } from "./ComponentToPrint";
-
-const LocactionList = () => {
-  const [record, setRecord] = useState([]);
-
+const LocactionList = (props) => {
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
-    content: () => componentRef.current
+    content: () => componentRef.current,
+    pageStyle: "@page { size: 11.694in 8.264in landscape}"
   });
 
+  const [record, setRecord] = useState([]);
   const dispatch = useDispatch();
   const state = useSelector((state) => state.scanlocation.indexData);
 
@@ -38,7 +36,6 @@ const LocactionList = () => {
   useEffect(() => {
     dispatch(indexLocation());
   }, [dispatch]);
-
   return (
     <div className="row">
       <div className="col-12 table table-responsive ">
@@ -70,23 +67,26 @@ const LocactionList = () => {
                       )}
                     </td>
                     <td>
-                      <button className="btn btn-default" onClick={handlePrint}>
-                        <i
-                          className="fas fa-qrcode"
-
-                          // onChange={setRecord("Hello")}
-                        />
-                      </button>
-                      {/* <i
-                        className="fas fa-qrcode"
-                        // onClick={handlePrint}
-                        onClick={() => {
-                          setRecord(rs);
-                        }}
-                        // onChange={setRecord("Hello")}
-                      >
-
-                      </i> */}
+                      <span>
+                        {/* <ReactToPrint
+                          trigger={() => (
+                            <a href="javascript:;">
+                              <i
+                                className="fas fa-print"
+                                onClick={() => setRecord(record)}
+                              />
+                            </a>
+                          )}
+                          content={() => this.componentRef}
+                          pageStyle="@page { size: 11.694in 8.264in landscape} "
+                        /> */}
+                        <button onClick={handlePrint(rs)}>
+                          Print this out!
+                        </button>
+                        <div style={{ display: "none" }}>
+                          <LocationToPrint ref={componentRef} record={record} />
+                        </div>
+                      </span>
                     </td>
                   </tr>
                 );
@@ -106,8 +106,6 @@ const LocactionList = () => {
           </tbody>
         </table>
       </div>
-
-      <ComponentToPrint ref={componentRef} record={record} />
     </div>
   );
 };
