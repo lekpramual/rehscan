@@ -1,21 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
+import moment from "moment";
+import "moment/locale/th";
+import { useDispatch, useSelector } from "react-redux";
+
+import AuthService from "../../../../managers/AuthService";
+import { showScan } from "../../../../reduxs/actions/ScanInOut";
+
+moment.locale("th");
 
 const ScanList = (props) => {
-  function formatNumber(num) {
-    const parseNumber = parseInt(num);
-    const toLocale = parseNumber.toLocaleString();
-    return toLocale;
-  }
+  const dispatch = useDispatch();
+  const showscan = useSelector((state) => state.scanuser.showData);
+  const showstatus = useSelector((state) => state.scanuser.showStatus);
+  const Auth = new AuthService("http://localhost:3000/");
+
   function isCheckData() {
     let iscount;
     var isdata = [];
-    props.data.map((rs) => {
+    showscan.map((rs) => {
       if (rs.lengtd === 0) {
         iscount = false;
         return iscount;
       } else {
         iscount = true;
-        isdata = rs;
+        isdata = rs.data;
         return { iscount, isdata };
       }
     });
@@ -23,6 +31,10 @@ const ScanList = (props) => {
   }
 
   const { iscount, isdata } = isCheckData();
+  useEffect(() => {
+    dispatch(showScan(Auth.getProfile().id, null, null));
+  }, [dispatch]);
+
   return (
     <div className="row">
       <div className="col-12">
@@ -31,22 +43,28 @@ const ScanList = (props) => {
             <tr>
               <td style={{ width: "5%" }}>ลำดับ</td>
               <td style={{ width: "20%" }}>วันที่</td>
-              <td style={{ width: "15%" }}>เวลา</td>
               <td style={{ width: "10%" }}>สถานที่</td>
               <td style={{ width: "10%" }}>สถานะ</td>
             </tr>
           </thead>
           <tbody>
             {iscount ? (
-              <tr key="isdata">
-                <td>{isdata.member_no}</td>
-                <td>{isdata.member_name}</td>
-                <td>{formatNumber(isdata.member_money)}</td>
-                <td>{formatNumber(isdata.member_sell)}</td>
-                <td>{formatNumber(isdata.member_stock)}</td>
-                <td>{formatNumber(isdata.member_buy)}</td>
-                <td>{formatNumber(isdata.member_paid)}</td>
-              </tr>
+              isdata.map((rs, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{moment(rs.checktime).format("LLL")} น.</td>
+                    <td>{rs.scan_location}</td>
+                    <td>
+                      {rs.checktype === "1" ? (
+                        <span className="badge bg-success">ออก</span>
+                      ) : (
+                        <span className="badge bg-danger">เข้า</span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })
             ) : (
               <tr key="emtpydata">
                 <td
@@ -54,8 +72,9 @@ const ScanList = (props) => {
                   colSpan="7"
                   className="text-center"
                 >
-                  {/* {(page - 1) * 20 + index + 1} */}
-                  --- ไม่มีข้อมูล ---
+                  {showstatus === "loading"
+                    ? "ดาวน์โหลดข้อมูล ..."
+                    : "--- ไม่มีข้อมูล ---"}
                 </td>
               </tr>
             )}

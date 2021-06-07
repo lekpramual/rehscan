@@ -1,16 +1,19 @@
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import SearchMember from "../common/Search";
+import { showScan } from "../../../../reduxs/actions/ScanInOut";
 import ScanList from "./ScanList";
 
 import AuthService from "../../../../managers/AuthService";
 function Scan() {
+  const dispatch = useDispatch();
   const Auth = new AuthService("http://localhost:3000/");
-  // const [data, setData] = useState([]);
-  const data = [];
+
   // Confirm From Search
   const onConfirm = (msg, date_start, date_end) => {
     if (msg === "SearchList") {
       console.log(date_start, date_end);
+      dispatch(showScan(Auth.getProfile().id, date_start, date_end));
     }
   };
 
@@ -18,7 +21,7 @@ function Scan() {
     if (!Auth.loggedIn()) {
       window.location.replace("/rehscan/#/scan/member-register");
     }
-  }, [Auth]);
+  }, [Auth, dispatch]);
 
   return (
     <section className="content" style={{ marginTop: -16 }}>
@@ -28,7 +31,7 @@ function Scan() {
             <div className="card">
               <SearchMember confirm={onConfirm} />
               <div className="card-body">
-                <ScanList data={data} />
+                <ScanList />
               </div>
             </div>
           </div>
