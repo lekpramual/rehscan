@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import ReactToPrint from "react-to-print";
-
 import { useDispatch, useSelector } from "react-redux";
-
+import { Link } from "react-router-dom";
 import { indexLocation } from "../../../../reduxs/actions/ScanLocation";
 
-import { ComponentToPrint } from "./ComponentToPrint";
+import LocactionPrint from "./LocactionPrint";
+
+import { withRouter } from "react-router-dom";
 
 const LocactionList = () => {
   const componentRef = useRef();
@@ -31,6 +32,7 @@ const LocactionList = () => {
   }
 
   const { iscount, isdata } = isCheckData();
+
   useEffect(() => {
     dispatch(indexLocation());
   }, [dispatch]);
@@ -67,22 +69,17 @@ const LocactionList = () => {
                         )}
                       </td>
                       <td>
-                        {/* <button
-                          className="btn btn-default"
-                          onClick={handlePrint}
+                        <Link
+                          to={{
+                            pathname: `/scan/member-locactionprint?id=${rs.scan_id}`,
+                            state: { message: "hello" }
+                          }}
+                          target="_bank"
                         >
-                          <i
-                            className="fas fa-qrcode"
-
-                            // onChange={setRecord("Hello")}
-                          />
-                        </button> */}
-                        <ReactToPrint
-                          trigger={() => <button>Print this out!</button>}
-                          content={() => componentRef.current}
-                          // onBeforePrint={() => setRecord(rs)}
-                          pageStyle="@page { size: 11.694in 8.264in landscape} "
-                        />
+                          <button className="btn btn-default">
+                            <i className="fas fa-qrcode" />
+                          </button>
+                        </Link>
                       </td>
                     </tr>
                   );
@@ -106,12 +103,7 @@ const LocactionList = () => {
       </div>
     );
   };
-  return (
-    <>
-      <TableList />
-      <ComponentToPrint ref={componentRef} />
-    </>
-  );
+  return <TableList />;
 };
 
 export default LocactionList;
