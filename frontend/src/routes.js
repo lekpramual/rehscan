@@ -13,10 +13,6 @@ const Locaction = React.lazy(() =>
   import("./components/scans/containers/Locaction")
 );
 
-const LocactionPrint = React.lazy(() =>
-  import("./components/scans/containers/LocactionPrint")
-);
-
 const routes = [
   {
     path: "/scan/member-register",
@@ -44,13 +40,6 @@ const routes = [
     exact: true,
     name: "จุดสแกน",
     component: Locaction,
-    icon: memberlocaction
-  },
-  {
-    path: "/scan/member-locactionprint",
-    exact: true,
-    name: "ปริ้นจุดสแกน",
-    component: LocactionPrint,
     icon: memberlocaction
   }
 ];
