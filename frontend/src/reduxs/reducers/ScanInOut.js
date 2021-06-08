@@ -1,10 +1,20 @@
 // เรียกใช้ ข้อมูล Action จาก UsersActions
-import { SHOW_BEGIN, SHOW_SUCCESS, SHOW_FAILURE } from "../actions/ScanInOut";
+import {
+  SHOW_BEGIN,
+  SHOW_SUCCESS,
+  SHOW_FAILURE,
+  CREATE_BEGIN,
+  CREATE_SUCCESS,
+  CREATE_FAILURE
+} from "../actions/ScanInOut";
 
 const initialState = {
   showData: [],
   showStatus: "idle",
-  showFailure: null
+  showFailure: null,
+  createData: [],
+  createStatus: "idle",
+  createFailure: null
 };
 
 export default function listitemReducer(state = initialState, action) {
@@ -26,6 +36,24 @@ export default function listitemReducer(state = initialState, action) {
         showStatus: "failed",
         showFailure: action.payload.error
       };
+    case CREATE_BEGIN:
+      return {
+        ...state,
+        createStatus: "loading"
+      };
+    case CREATE_SUCCESS:
+      return {
+        ...state,
+        createStatus: "success",
+        createData: action.payload.payload
+      };
+    case CREATE_FAILURE:
+      return {
+        ...state,
+        createStatus: "failed",
+        createFailure: action.payload.error
+      };
+
     default:
       return state;
   }

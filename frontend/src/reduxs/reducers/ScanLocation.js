@@ -34,7 +34,7 @@ export default function listitemReducer(state = initialState, action) {
       return {
         ...state,
         indexStatus: "failed",
-        indexFailure: action.payload.error
+        indexFailure: action.payload.payload.message
       };
     case CREATE_BEGIN:
       return {
@@ -51,7 +51,7 @@ export default function listitemReducer(state = initialState, action) {
       return {
         ...state,
         createStatus: "failed",
-        createFailure: action.payload.error
+        createFailure: action.payload.payload.message
       };
     default:
       return state;

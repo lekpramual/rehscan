@@ -1,19 +1,13 @@
-import React, { useEffect, useRef } from "react";
-import ReactToPrint from "react-to-print";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { indexLocation } from "../../../../reduxs/actions/ScanLocation";
 
-import LocactionPrint from "./LocactionPrint";
-
-import { withRouter } from "react-router-dom";
-
 const LocactionList = () => {
-  const componentRef = useRef();
-
   const dispatch = useDispatch();
   const state = useSelector((state) => state.scanlocation.indexData);
   const indexStatus = useSelector((state) => state.scanlocation.indexStatus);
+  const indexFailure = useSelector((state) => state.scanlocation.indexFailure);
 
   function isCheckData() {
     let iscount;
@@ -91,9 +85,15 @@ const LocactionList = () => {
                     colSpan="7"
                     className="text-center"
                   >
-                    {indexStatus === "loading"
-                      ? "ดาวน์โหลดข้อมูล ..."
-                      : "--- ไม่มีข้อมูล ---"}
+                    {indexStatus === "loading" ? (
+                      <div className="overlay">
+                        <i className="fas fa-2x fa-sync-alt fa-spin" />
+                      </div>
+                    ) : indexStatus === "failed" ? (
+                      <p className="text-danger">{indexFailure}</p>
+                    ) : (
+                      "--- ไม่มีข้อมูล ---"
+                    )}
                   </td>
                 </tr>
               )}

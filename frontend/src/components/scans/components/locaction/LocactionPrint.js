@@ -1,19 +1,16 @@
 import React, { useEffect, useRef } from "react";
-import QRcode from "qrcode.react";
+
 import ReactToPrint from "react-to-print";
 import AuthService from "../../../../managers/AuthService";
 
 import { useDispatch } from "react-redux";
 import { LocationToPrint } from "./LocationToPrint";
 
-import { withRouter, useLocation } from "react-router-dom";
-
 const LocactionPrint = () => {
   const componentRef = useRef();
 
   const dispatch = useDispatch();
   const Auth = new AuthService("http://localhost:3000/");
-  const location = useLocation();
 
   useEffect(() => {
     if (!Auth.loggedIn()) {

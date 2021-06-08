@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import arePoints from "./arePoints";
 import QrReader from "react-qr-reader";
 import { geolocated } from "react-geolocated";
-
 import ScanInOutMessage from "../common/Message";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -13,7 +12,6 @@ const ScanInOutList = (props) => {
     if (data !== null && data !== undefined) {
       var obj = JSON.parse(data);
       setQrscan(obj);
-
       console.log(obj.latitude);
       arePoints(
         {

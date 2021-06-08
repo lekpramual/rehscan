@@ -5,7 +5,7 @@ function ScanInOut(props) {
   return (
     <div className="card-header">
       <div className="row">
-        <div className="col-md-6 col-12">
+        <div className="col-md-6 col-12" style={{ padding: 2 }}>
           <button
             type="submit"
             className="btn btn-default btn-lg btn-block"

@@ -10,14 +10,15 @@ moment.locale("th");
 
 const ScanList = (props) => {
   const dispatch = useDispatch();
-  const showscan = useSelector((state) => state.scanuser.showData);
-  const showstatus = useSelector((state) => state.scanuser.showStatus);
+  const showData = useSelector((state) => state.scanuser.showData);
+  const showStatus = useSelector((state) => state.scanuser.showStatus);
+  const showFailure = useSelector((state) => state.scanuser.showFailure);
   const Auth = new AuthService("http://localhost:3000/");
 
   function isCheckData() {
     let iscount;
     var isdata = [];
-    showscan.map((rs) => {
+    showData.map((rs) => {
       if (rs.lengtd === 0) {
         iscount = false;
         return iscount;
@@ -37,14 +38,14 @@ const ScanList = (props) => {
 
   return (
     <div className="row">
-      <div className="col-12">
-        <table className="table table-bordered table-responsive p-0">
+      <div className="col-12 table table-responsive ">
+        <table className="table table-bordered table-hover text-nowrap">
           <thead>
             <tr>
-              <td style={{ width: "5%" }}>ลำดับ</td>
-              <td style={{ width: "20%" }}>วันที่</td>
-              <td style={{ width: "10%" }}>สถานที่</td>
-              <td style={{ width: "10%" }}>สถานะ</td>
+              <td>ลำดับ</td>
+              <td>วันที่</td>
+              <td>สถานที่</td>
+              <td>สถานะ</td>
             </tr>
           </thead>
           <tbody>
@@ -53,7 +54,7 @@ const ScanList = (props) => {
                 return (
                   <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{moment(rs.checktime).format("LLL")} น.</td>
+                    <td>{moment(rs.checktime).format("LLLL")} น.</td>
                     <td>{rs.scan_location}</td>
                     <td>
                       {rs.checktype === "1" ? (
@@ -72,9 +73,15 @@ const ScanList = (props) => {
                   colSpan="7"
                   className="text-center"
                 >
-                  {showstatus === "loading"
-                    ? "ดาวน์โหลดข้อมูล ..."
-                    : "--- ไม่มีข้อมูล ---"}
+                  {showStatus === "loading" ? (
+                    <div className="overlay">
+                      <i className="fas fa-2x fa-sync-alt fa-spin" />
+                    </div>
+                  ) : showStatus === "failed" ? (
+                    <p className="text-danger">{showFailure}</p>
+                  ) : (
+                    "--- ไม่มีข้อมูล ---"
+                  )}
                 </td>
               </tr>
             )}

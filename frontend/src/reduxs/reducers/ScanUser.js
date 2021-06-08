@@ -24,7 +24,7 @@ export default function listitemReducer(state = initialState, action) {
       return {
         ...state,
         showStatus: "failed",
-        showFailure: action.payload.error
+        showFailure: action.payload.payload.message
       };
     default:
       return state;

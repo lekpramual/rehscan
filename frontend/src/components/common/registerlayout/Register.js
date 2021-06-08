@@ -203,6 +203,7 @@ function Register(props) {
                       value={phone.value}
                       onChange={(e) => setPhone({ value: e.target.value })}
                     />
+                    <input type="hidden" value={inputValue} />
                   </div>
                 </div>
 
