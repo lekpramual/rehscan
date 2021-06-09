@@ -52,12 +52,12 @@ const ScanInOutList = (props) => {
       <>
         <div className="row">
           <div className="col-12" style={{ textAlign: "center" }}>
-            {props.coords.latitude.toFixed(4)} ||{" "}
+            {/* {props.coords.latitude.toFixed(4)} ||{" "}
             {qrscan !== undefined ? parseFloat(qrscan.latitude).toFixed(4) : 0}
             <br />
             {props.coords.longitude.toFixed(4)} ||{" "}
             {qrscan !== undefined ? parseFloat(qrscan.longitude).toFixed(4) : 0}
-            <br />
+            <br /> */}
             {props.show ? (
               <QrReader
                 delay={300}
