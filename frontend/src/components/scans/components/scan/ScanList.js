@@ -44,6 +44,7 @@ const ScanList = (props) => {
             <tr>
               <td>ลำดับ</td>
               <td>วันที่</td>
+              <td>เวลา</td>
               <td>สถานที่</td>
               <td>สถานะ</td>
             </tr>
@@ -54,7 +55,8 @@ const ScanList = (props) => {
                 return (
                   <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{moment(rs.checktime).format("LLLL")} น.</td>
+                    <td>{moment(rs.checktime).format("ll")}</td>
+                    <td>{moment(rs.checktime).format("hh:mm:ss")}</td>
                     <td>{rs.scan_location}</td>
                     <td>
                       {rs.checktype === "1" ? (

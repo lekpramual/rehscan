@@ -68,7 +68,7 @@ export const createFailure = (payload) => ({
 // checkType : เข้า 0 - ออก 1
 // scanId : รหัสจุดสแกน
 
-export function createRegister(data) {
+export function createScanInOut(data) {
   return (dispatch) => {
     dispatch(createBegin());
     return axios
@@ -83,6 +83,7 @@ export function createRegister(data) {
         var data = [];
         data.push(res.data);
         dispatch(createSuccess(data));
+        console.log(data);
         return data;
       })
       .catch((error) => dispatch(createFailure(error)));

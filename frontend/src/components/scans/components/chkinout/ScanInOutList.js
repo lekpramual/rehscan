@@ -12,7 +12,7 @@ const ScanInOutList = (props) => {
     if (data !== null && data !== undefined) {
       var obj = JSON.parse(data);
       setQrscan(obj);
-      console.log(obj.latitude);
+      console.log(obj);
       arePoints(
         {
           lat: lat,
@@ -24,8 +24,8 @@ const ScanInOutList = (props) => {
         },
         0.2
       )
-        ? props.confirm(props.msg, false)
-        : props.confirm(props.msg, true);
+        ? props.confirm(props.msg, false, obj.key, true)
+        : props.confirm(props.msg, true, "", false);
     }
   };
 
@@ -51,7 +51,7 @@ const ScanInOutList = (props) => {
     ) : props.coords ? (
       <>
         <div className="row">
-          <div className="col-12">
+          <div className="col-12" style={{ textAlign: "center" }}>
             {props.coords.latitude.toFixed(4)} ||{" "}
             {qrscan !== undefined ? parseFloat(qrscan.latitude).toFixed(4) : 0}
             <br />
