@@ -2,6 +2,7 @@
 **/build
 **/package-lock.json
 **/theme
+**/src/managers
 
 **/*.log
 *.log

@@ -8,7 +8,6 @@ import { createScanInOut } from "../../../../reduxs/actions/ScanInOut";
 // LocalStore
 
 import AuthService from "../../../../managers/AuthService";
-import { resolveHref } from "next/dist/next-server/lib/router/router";
 function ScanInOut() {
   const dispatch = useDispatch();
   const Auth = new AuthService("http://localhost:3000/");
@@ -19,7 +18,6 @@ function ScanInOut() {
   const onConfirm = (msg, isshow) => {
     console.log(isshow);
     console.log(msg);
-
     setMsg(msg);
     setShow(isshow);
   };
