@@ -56,7 +56,7 @@ const ScanList = (props) => {
                   <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{moment(rs.checktime).format("ll")}</td>
-                    <td>{moment(rs.checktime).format("hh:mm:ss")}</td>
+                    <td>{moment(rs.checktime).format("HH:mm:ss")}</td>
                     <td>{rs.scan_location}</td>
                     <td>
                       {rs.checktype === "1" ? (
