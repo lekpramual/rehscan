@@ -2,6 +2,29 @@ import React from "react";
 import QRcode from "qrcode.react";
 
 export class LocationToPrint extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      records: []
+    };
+  }
+  // ปรับข้อมูล เมื่อ มีการ อัปเดต สโตส
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    console.log("5555");
+    console.log(nextProps.record);
+    // get date_seach
+    var isData = [];
+
+    if (nextProps.record !== this.state.records) {
+      console.log("666");
+      isData = nextProps.record;
+      console.log(isData);
+      this.setState({
+        records: isData
+      });
+    }
+  }
+
   render() {
     return (
       <div className="p-5">
@@ -27,9 +50,9 @@ export class LocationToPrint extends React.Component {
         >
           <div className="text-center">
             {/* <Avatar
-            src="/static/logo/logo512.png"
-            style={{ width: "200px", height: "200px" }}
-          /> */}
+      src="/static/logo/logo512.png"
+      style={{ width: "200px", height: "200px" }}
+    /> */}
           </div>
         </div>
         <div
@@ -49,7 +72,8 @@ export class LocationToPrint extends React.Component {
           style={{ marginTop: "-20px" }}
         >
           <div className="text-center">
-            <h3>xxxx</h3>
+            {/* <h3>{JSON.stringify(this.state.records)}</h3> */}
+            <h3>{this.state.records.scan_location}</h3>
           </div>
         </div>
 
@@ -63,7 +87,7 @@ export class LocationToPrint extends React.Component {
           <div className="text-center">
             <QRcode
               id="myqr"
-              value={`123456789`}
+              value={`${JSON.stringify(this.state.records)}`}
               size={320}
               includeMargin={true}
             />

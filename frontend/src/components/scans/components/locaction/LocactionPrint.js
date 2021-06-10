@@ -1,43 +1,46 @@
-import React, { useEffect, useRef } from "react";
+import React, { Component } from "react";
 
-import ReactToPrint from "react-to-print";
-import AuthService from "../../../../managers/AuthService";
-
-import { useDispatch } from "react-redux";
 import { LocationToPrint } from "./LocationToPrint";
 
-const LocactionPrint = () => {
-  const componentRef = useRef();
+export class LocactionPrint extends React.Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      records: []
+    };
+  }
 
-  const dispatch = useDispatch();
-  const Auth = new AuthService("http://localhost:3000/");
+  componentDidMount() {
+    console.log("Loading ...");
+  }
 
-  useEffect(() => {
-    if (!Auth.loggedIn()) {
-      window.location.replace("/rehscan/#/scan/member-register");
+  componentWillUpdate(nextProps) {
+    console.log("Set State...");
+    // You don't have to do this check first, but it can help prevent an unneeded render
+    if (nextProps.record !== this.state.records) {
+      console.log("Set State 2...");
+      console.log(nextProps.record);
+      console.log(this.state.records);
+      this.setState({ records: nextProps.record });
     }
-  }, [Auth, dispatch]);
+  }
 
-  return (
-    <section className="content" style={{ marginTop: -16 }}>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-12">
-            <div className="card">
-              <div className="card-body ">
-                <ReactToPrint
-                  trigger={() => <button>Print this out!</button>}
-                  content={() => componentRef.current}
-                  pageStyle="@page { size: 11.694in 8.264in landscape} "
-                />
-                <LocationToPrint ref={componentRef} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+  componentWillReceiveProps(nextProps) {
+    console.log("Set State...");
+    // You don't have to do this check first, but it can help prevent an unneeded render
+    if (nextProps.record !== this.state.records) {
+      console.log("Set State 2...");
+      console.log(nextProps.record);
+      console.log(this.state.records);
+      this.setState({ records: nextProps.record });
+    }
+  }
 
-export default LocactionPrint;
+  render() {
+    const List = () => {
+      return <h1>{JSON.stringify(this.state.records)}</h1>;
+    };
+    return <LocationToPrint ref={componentRef} record={record} />;
+  }
+}

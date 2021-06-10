@@ -24,7 +24,7 @@ const ScanInOutList = (props) => {
         },
         0.2
       )
-        ? props.confirm(props.msg, false, obj.key, true)
+        ? props.confirm(props.msg, false, obj.scan_id, true)
         : props.confirm(props.msg, true, "", false);
     }
   };
