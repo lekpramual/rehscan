@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactToPrint from "react-to-print";
-import QRcode from "qrcode.react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { indexLocation } from "../../../../reduxs/actions/ScanLocation";
 
 import { LocationToPrint } from "./LocationToPrint";
@@ -124,7 +122,7 @@ const LocactionList = () => {
 
   return (
     <div>
-      {JSON.stringify(record)}
+      {/* {JSON.stringify(record)} */}
       <div className="row">
         <div className="col-12 table table-responsive ">
           <table className="table table-bordered table-hover text-nowrap">
@@ -167,11 +165,13 @@ const LocactionList = () => {
                             </a>
                           )}
                           content={() => componentRef.current}
+                          onBeforeGetContent={() =>
+                            //perform setState here
+                            setRecord(rs)
+                            //return Promise.resolve();
+                          }
                           pageStyle="@page { size: 11.694in 8.264in landscape} "
                         />
-                        {/* <div style={{ display: "none" }}>
-                          <LocationToPrint ref={componentRef} record={record} />
-                        </div> */}
                       </td>
                     </tr>
                   );
@@ -199,8 +199,10 @@ const LocactionList = () => {
           </table>
         </div>
       </div>
-
-      <LocationToPrint ref={componentRef} record={record} />
+      <div style={{ display: "none" }}>
+        {" "}
+        <LocationToPrint ref={componentRef} record={record} />
+      </div>
     </div>
   );
 };

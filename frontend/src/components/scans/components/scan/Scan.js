@@ -5,6 +5,7 @@ import { showScan } from "../../../../reduxs/actions/ScanInOut";
 import ScanList from "./ScanList";
 
 import AuthService from "../../../../managers/AuthService";
+import { profile as Profile } from "../common/profile";
 function Scan() {
   const dispatch = useDispatch();
   const Auth = new AuthService("http://localhost:3000/");
@@ -26,6 +27,7 @@ function Scan() {
   return (
     <section className="content" style={{ marginTop: -16 }}>
       <div className="container-fluid">
+        <Profile />
         <div className="row">
           <div className="col-12">
             <div className="card">

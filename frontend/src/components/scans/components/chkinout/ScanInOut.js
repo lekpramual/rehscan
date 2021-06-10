@@ -8,6 +8,7 @@ import { createScanInOut } from "../../../../reduxs/actions/ScanInOut";
 // LocalStore
 
 import AuthService from "../../../../managers/AuthService";
+import { profile as Profile } from "../common/profile";
 function ScanInOut() {
   const dispatch = useDispatch();
   const Auth = new AuthService("http://localhost:3000/");
@@ -81,6 +82,7 @@ function ScanInOut() {
   return (
     <section className="content" style={{ marginTop: -16 }}>
       <div className="container-fluid">
+        <Profile />
         <div className="card">
           <SearchMember confirm={onConfirm} />
           <div className="card-body">

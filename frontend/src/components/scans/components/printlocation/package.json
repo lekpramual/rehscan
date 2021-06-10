@@ -1,0 +1,7 @@
+{
+    "name": "printlocaction",
+    "version": "1.0.0",
+    "private": true,
+    "main": "./PrintLocation.js"
+  }
+  

@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 // import "./index.css";
 import App from "./App";
-import swDev from "./swDev";
+// import swDev from "./swDev";
 
 import { Provider } from "react-redux";
 import configureStore from "./reduxs/store";
@@ -17,4 +17,4 @@ const MyApp = () => (
 );
 ReactDOM.render(<MyApp />, document.getElementById("root"));
 
-swDev();
+// swDev();

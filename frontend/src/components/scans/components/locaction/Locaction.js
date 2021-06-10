@@ -6,6 +6,7 @@ import AuthService from "../../../../managers/AuthService";
 
 import { useDispatch } from "react-redux";
 import { createLocation } from "../../../../reduxs/actions/ScanLocation";
+import { profile as Profile } from "../common/profile";
 
 function Locaction() {
   const dispatch = useDispatch();
@@ -77,6 +78,7 @@ function Locaction() {
   return (
     <section className="content" style={{ marginTop: -16 }}>
       <div className="container-fluid">
+        <Profile />
         <div className="row">
           <div className="col-12">
             <div className="card">
