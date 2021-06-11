@@ -8,7 +8,8 @@ export const profile = () => {
         <div className="card">
           <div className="card-body" style={{ textAlign: "center" }}>
             <span className="text-muted">
-              <i className="fas fa-user" /> {Auth.getProfile().name}
+              <i className="fas fa-user" />{" "}
+              {!Auth.loggedIn() ? "" : Auth.getProfile().name}
             </span>
           </div>
         </div>

@@ -3,30 +3,29 @@ import moment from "moment";
 import QRcode from "qrcode.react";
 import "moment/locale/th";
 
+import logo from "../../../../assets/logo/logo512.png";
+
 export class LocationToPrint extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      records: []
-    };
   }
 
-  // // ปรับข้อมูล เมื่อ มีการ อัปเดต สโตส
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    console.log("5555");
-    console.log(nextProps.record);
-    // get date_seach
-    var isData = [];
+  // // // ปรับข้อมูล เมื่อ มีการ อัปเดต สโตส
+  // UNSAFE_componentWillReceiveProps(nextProps) {
+  //   console.log("5555");
+  //   console.log(nextProps.record);
+  //   // get date_seach
+  //   var isData = [];
 
-    if (nextProps.record !== this.state.records) {
-      console.log("666");
-      isData = nextProps.record;
-      console.log(isData);
-      this.setState({
-        records: isData
-      });
-    }
-  }
+  //   if (nextProps.record !== this.state.records) {
+  //     console.log("666");
+  //     isData = nextProps.record;
+  //     console.log(isData);
+  //     this.setState({
+  //       records: isData
+  //     });
+  //   }
+  // }
 
   render() {
     return (
@@ -38,7 +37,7 @@ export class LocationToPrint extends React.Component {
           className="py-2 text-muted"
         >
           <div>
-            <middle>REH-20210511</middle>
+            <middle>REH-{moment(new Date()).format("YYYYMMDD")}</middle>
           </div>
           <div className="text-right">
             <middle>วันที่ {moment(new Date()).format("ll")}</middle>
@@ -52,10 +51,7 @@ export class LocationToPrint extends React.Component {
           style={{ marginTop: "40px" }}
         >
           <div className="text-center">
-            {/* <Avatar
-      src="/static/logo/logo512.png"
-      style={{ width: "200px", height: "200px" }}
-    /> */}
+            <img src={logo} style={{ width: "200px", height: "200px" }} />
           </div>
         </div>
         <div
@@ -72,11 +68,10 @@ export class LocationToPrint extends React.Component {
           className="py-2 text-muted"
           type="flex"
           justify="center"
-          style={{ marginTop: "-20px" }}
+          style={{ marginTop: "-10px" }}
         >
           <div className="text-center">
-            {/* <h3>{JSON.stringify(this.state.records)}</h3> */}
-            <h3>{this.state.records.scan_location}</h3>
+            <h3>{this.props.record.scan_location}</h3>
           </div>
         </div>
 
@@ -90,7 +85,7 @@ export class LocationToPrint extends React.Component {
           <div className="text-center">
             <QRcode
               id="myqr"
-              value={`${JSON.stringify(this.state.records)}`}
+              value={`${JSON.stringify(this.props.record)}`}
               size={320}
               includeMargin={true}
             />

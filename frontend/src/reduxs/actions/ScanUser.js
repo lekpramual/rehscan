@@ -23,7 +23,7 @@ export function showUser(search) {
   return (dispatch) => {
     dispatch(showBegin());
     return axios
-      .get(`${ApiServiceHeroku}/user/show?search=${search}`, {
+      .get(`${ApiServiceHeroku}/api/user/show?search=${search}`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-type": "application/json",

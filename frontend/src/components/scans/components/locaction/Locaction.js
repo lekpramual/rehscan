@@ -74,7 +74,7 @@ function Locaction() {
     if (!Auth.loggedIn()) {
       window.location.replace("/rehscan/#/scan/member-register");
     }
-  }, [Auth, dispatch]);
+  }, [dispatch]);
   return (
     <section className="content" style={{ marginTop: -16 }}>
       <div className="container-fluid">
