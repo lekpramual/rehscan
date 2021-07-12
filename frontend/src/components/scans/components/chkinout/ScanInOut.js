@@ -9,6 +9,7 @@ import { createScanInOut } from "../../../../reduxs/actions/ScanInOut";
 
 import AuthService from "../../../../managers/AuthService";
 import { profile as Profile } from "../common/profile";
+import ErrorPage from "../../ErrorPage";
 function ScanInOut() {
   const dispatch = useDispatch();
   const Auth = new AuthService("http://localhost:3000/");
@@ -73,13 +74,9 @@ function ScanInOut() {
     }
   };
 
-  useEffect(() => {
-    if (!Auth.loggedIn()) {
-      window.location.replace("/rehscan/#/scan/member-register");
-    }
-  }, [Auth]);
+  useEffect(() => {}, []);
 
-  return (
+  return Auth.loggedIn() ? (
     <section className="content" style={{ marginTop: -16 }}>
       <div className="container-fluid">
         <Profile />
@@ -91,6 +88,8 @@ function ScanInOut() {
         </div>
       </div>
     </section>
+  ) : (
+    <ErrorPage />
   );
 }
 

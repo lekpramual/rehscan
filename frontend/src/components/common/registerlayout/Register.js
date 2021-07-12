@@ -13,7 +13,7 @@ import { showUser } from "../../../reduxs/actions/ScanUser";
 import { createRegister } from "../../../reduxs/actions/ScanRegister";
 
 function Register(props) {
-  const Auth = new AuthService("http://localhost:3000/");
+  const Auth = new AuthService();
   const dispatch = useDispatch();
   const [inputValue, setValue] = useState("");
   const [selectedValue, setSelectedValue] = useState(null);
@@ -146,7 +146,12 @@ function Register(props) {
     }
   };
 
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => {
+    if (Auth.loggedIn()) {
+      // console.log(Auth.loggedIn());
+      window.location.replace("/rehscan/#/scan/member-list");
+    }
+  }, [Auth, dispatch]);
 
   return (
     <div className="hold-transition login-page">

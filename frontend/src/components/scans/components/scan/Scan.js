@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
+
 import { useDispatch } from "react-redux";
 import SearchMember from "../common/Search";
 import { showScan } from "../../../../reduxs/actions/ScanInOut";
 import ScanList from "./ScanList";
+import ErrorPage from "../../ErrorPage";
 
 import AuthService from "../../../../managers/AuthService";
 import { profile as Profile } from "../common/profile";
@@ -18,13 +20,9 @@ function Scan() {
     }
   };
 
-  useEffect(() => {
-    if (!Auth.loggedIn()) {
-      window.location.replace("/rehscan/#/scan/member-register");
-    }
-  }, [Auth, dispatch]);
+  useEffect(() => {}, []);
 
-  return (
+  return Auth.loggedIn() ? (
     <section className="content" style={{ marginTop: -16 }}>
       <div className="container-fluid">
         <Profile />
@@ -40,6 +38,8 @@ function Scan() {
         </div>
       </div>
     </section>
+  ) : (
+    <ErrorPage />
   );
 }
 
