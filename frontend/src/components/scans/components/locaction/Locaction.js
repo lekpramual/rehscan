@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Swal from "sweetalert2";
 import LocactionList from "./LocactionList";
 import LocactionAdd from "./LocactionAdd";
-import AuthService from "../../../../managers/AuthService";
+// import AuthService from "../../../../managers/AuthService";
 
 import { useDispatch } from "react-redux";
 import { createLocation } from "../../../../reduxs/actions/ScanLocation";
@@ -10,7 +10,7 @@ import { profile as Profile } from "../common/profile";
 
 function Locaction() {
   const dispatch = useDispatch();
-  const Auth = new AuthService("http://localhost:3000/");
+  // const Auth = new AuthService("http://localhost:3000/");
 
   // Confirm From Search
   const onConfirm = (latitude, longitude, location) => {
@@ -70,11 +70,8 @@ function Locaction() {
     });
   };
 
-  useEffect(() => {
-    if (!Auth.loggedIn()) {
-      window.location.replace("/rehscan/#/scan/member-register");
-    }
-  }, [dispatch]);
+  useEffect(() => {}, []);
+
   return (
     <section className="content" style={{ marginTop: -16 }}>
       <div className="container-fluid">

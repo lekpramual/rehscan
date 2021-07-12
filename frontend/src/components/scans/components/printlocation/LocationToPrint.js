@@ -51,7 +51,11 @@ export class LocationToPrint extends React.Component {
           style={{ marginTop: "40px" }}
         >
           <div className="text-center">
-            <img src={logo} style={{ width: "200px", height: "200px" }} />
+            <img
+              src={logo}
+              alt="qrcode"
+              style={{ width: "200px", height: "200px" }}
+            />
           </div>
         </div>
         <div

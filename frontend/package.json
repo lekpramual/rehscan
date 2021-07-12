@@ -1,6 +1,6 @@
 {
   "name": "rehscan",
-  "version": "1.0.0 ( Demo )",
+  "version": "1.0.2 ( Demo )",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",

@@ -32,9 +32,10 @@ const ScanList = (props) => {
   }
 
   const { iscount, isdata } = isCheckData();
+
   useEffect(() => {
     dispatch(showScan(Auth.getProfile().id, null, null));
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="row">
