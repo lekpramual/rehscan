@@ -32,26 +32,6 @@ function Aside(props) {
         >
           <li className="nav-item">
             <Link
-              to="/scan/member-list"
-              className={handleNavLink("/scan/member-list")}
-              replace
-            >
-              <img
-                src={member}
-                alt="dashboard Logo"
-                style={{
-                  width: 30,
-                  marginRight: 5,
-                  marginLeft: -7,
-                  paddingBottom: 2
-                }}
-              />
-              <p style={{ fontWeight: "bold" }}> ข้อมูลสแกน </p>
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link
               to="/scan/member-chkinout"
               className={handleNavLink("/scan/member-chkinout")}
               replace
@@ -67,6 +47,26 @@ function Aside(props) {
                 }}
               />
               <p style={{ fontWeight: "bold" }}> สแกนเข้า-ออก </p>
+            </Link>
+          </li>
+
+          <li className="nav-item">
+            <Link
+              to="/scan/member-list"
+              className={handleNavLink("/scan/member-list")}
+              replace
+            >
+              <img
+                src={member}
+                alt="dashboard Logo"
+                style={{
+                  width: 30,
+                  marginRight: 5,
+                  marginLeft: -7,
+                  paddingBottom: 2
+                }}
+              />
+              <p style={{ fontWeight: "bold" }}> ข้อมูลสแกน </p>
             </Link>
           </li>
 
@@ -97,7 +97,7 @@ function Aside(props) {
   return (
     <aside className="main-sidebar elevation-4 sidebar-light-warning">
       {/* Brand Logo */}
-      <Link to="/scan/member-list" className="brand-link">
+      <Link to="/scan/member-chkinout" className="brand-link">
         <img
           src={AdminLTELogo}
           alt="AdminLTELogo Logo"

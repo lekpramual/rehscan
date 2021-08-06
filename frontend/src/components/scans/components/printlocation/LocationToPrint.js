@@ -4,6 +4,7 @@ import QRcode from "qrcode.react";
 import "moment/locale/th";
 
 import logo from "../../../../assets/logo/logo512.png";
+import logoChome from "../../../../assets/ico/Google_Chrome_icon_.png";
 
 export class LocationToPrint extends React.Component {
   constructor(props) {
@@ -48,7 +49,7 @@ export class LocationToPrint extends React.Component {
           className="py-2 text-muted"
           type="flex"
           justify="center"
-          style={{ marginTop: "40px" }}
+          style={{ marginTop: "20px" }}
         >
           <div className="text-center">
             <img
@@ -92,6 +93,22 @@ export class LocationToPrint extends React.Component {
               value={`${JSON.stringify(this.props.record)}`}
               size={320}
               includeMargin={true}
+            />
+          </div>
+        </div>
+
+        <div
+          className="py-2 text-muted"
+          type="flex"
+          justify="center"
+          style={{ marginTop: "-20px" }}
+        >
+          <div className="text-center">
+            รองรับการทำงานบน{" "}
+            <img
+              src={logoChome}
+              alt="chomeicon"
+              style={{ width: "50px", height: "50px" }}
             />
           </div>
         </div>

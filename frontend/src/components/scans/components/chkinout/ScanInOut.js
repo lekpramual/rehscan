@@ -61,7 +61,7 @@ function ScanInOut() {
       Create.then((status) => {
         status
           ? setTimeout(() => {
-              window.location.replace("/rehscan/#/scan/member-list");
+              window.location.replace("/rehscan/#/scan/member-chkinout");
             }, 500)
           : setTimeout(() => {
               window.location.reload();

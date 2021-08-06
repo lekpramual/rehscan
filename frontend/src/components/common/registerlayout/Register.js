@@ -105,7 +105,7 @@ function Register(props) {
           if (resRegister === "created successful") {
             Auth.setToken(data_token);
             setTimeout(() => {
-              window.location.replace("/rehscan/#/scan/member-list");
+              window.location.replace("/rehscan/#/scan/member-chkinout");
             }, 1600);
             resolve(true);
           } else {
@@ -149,7 +149,7 @@ function Register(props) {
   useEffect(() => {
     if (Auth.loggedIn()) {
       // console.log(Auth.loggedIn());
-      window.location.replace("/rehscan/#/scan/member-list");
+      window.location.replace("/rehscan/#/scan/member-chkinout");
     }
   }, [Auth, dispatch]);
 
