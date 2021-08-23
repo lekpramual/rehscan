@@ -22,7 +22,8 @@ const ScanInOutList = (props) => {
           lat: obj.latitude,
           lng: obj.longitude
         },
-        0.2
+        1
+        // km
       )
         ? props.confirm(props.msg, false, obj.scan_id, true)
         : props.confirm(props.msg, true, "", false);

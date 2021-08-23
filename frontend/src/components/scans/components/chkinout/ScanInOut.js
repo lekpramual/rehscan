@@ -18,15 +18,11 @@ function ScanInOut() {
   const [show, setShow] = useState(false);
   // Confirm From Search
   const onConfirm = (msg, isshow) => {
-    console.log(isshow);
-    console.log(msg);
     setMsg(msg);
     setShow(isshow);
   };
 
   const onConfirmScan = (msg, isshow, location, status) => {
-    console.log(status);
-    console.log(msg);
     setMsg(msg);
     setShow(isshow);
     // Scan success
